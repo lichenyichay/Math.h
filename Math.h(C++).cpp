@@ -5,13 +5,24 @@
 #include <math.h>
 using namespace std;
 void menu();
-void math(int name);
+void math(int name)throw(char);
+typedef struct counotinmenu {
+    string notice;
+}counotinmenu;
 int main()
 {
     int cou = 0;
     menu();
-    cout << "请输入序号：";
-    cin >> cou;
+    while (1) {
+        try {
+            cout << "请输入序号：";
+            cin >> cou;
+            break;
+        }
+        catch (exception) {
+            cout << "输入异常，请重新输入！";
+        }
+    }
     math(cou);
     return 0;
 }
@@ -28,6 +39,22 @@ void menu() {
     cout << "13、对x进行开方                       14、求x的绝对值\n";
     cout << "====================\n";
 }
-void math(int name) {
-    ;
+void math(int name) throw(char) {
+    switch (name)
+    {
+        case 1: {
+            double b;
+            cout << "请输入数据：";
+            cin >> b;
+            cout << "结果是：" << ceil(b);
+            break;
+        }
+
+        default:{
+            try { throw(counotinmenu); }
+            catch (counotinmenu) { cout << "序号不在菜单内！"; }
+            break;
+        }
+            
+    }
 }
